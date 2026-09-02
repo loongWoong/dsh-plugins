@@ -1,0 +1,7 @@
+# goal-auto-resume: re-arms unfinished goals after abnormal stops so the
+# native goal-round-driver continues the next round. Host row only — it
+# consumes host services (agents, goals, timer), publishes none, and
+# therefore needs no isolate realm.
+- insert:
+    - id: goal-auto-resume
+      name: 'dsh-goal-auto-resume'

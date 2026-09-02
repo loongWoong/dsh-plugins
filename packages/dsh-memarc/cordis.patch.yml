@@ -1,0 +1,7 @@
+# memarc: long-term memory store + session archive management.
+# Host row only — it consumes host services (fs, sandboxPolicy,
+# workspaceRegistry, sessionQuery, sessions, connection, tools), publishes
+# none, and therefore needs no isolate realm.
+- insert:
+    - id: memarc
+      name: 'dsh-memarc'

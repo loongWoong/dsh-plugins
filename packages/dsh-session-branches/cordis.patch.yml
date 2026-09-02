@@ -1,0 +1,7 @@
+# session-branches: visualize session fork relationships as a tree per
+# workspace. Host row only — it consumes host services (sessionQuery,
+# connection), publishes none, and therefore needs no isolate realm. The
+# browser half mounts a shell.overlay floating panel and a Settings section.
+- insert:
+    - id: session-branches
+      name: 'dsh-session-branches'

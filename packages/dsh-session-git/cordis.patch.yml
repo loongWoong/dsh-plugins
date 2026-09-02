@@ -1,0 +1,8 @@
+# session-git: Session Git — export DSH sessions of a workspace as JSON files
+# under <project>/.dsh-sessions/ for Git commit, and import them back as fully
+# continuable sessions. Host row only — it consumes host services (fs,
+# sandboxPolicy, sessionQuery, sessionPersistence, tools), publishes none, and
+# therefore needs no isolate realm.
+- insert:
+    - id: session-git
+      name: 'dsh-session-git'

@@ -1,0 +1,10 @@
+{
+  "name": "dsh-plugins",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Community plugins for DeepSeek Harness (DSH): long-term memory, session archive, session git, session branches, goal auto-resume.",
+  "license": "MIT",
+  "scripts": {
+    "test": "node packages/dsh-memarc/test/behavior.mjs && node packages/dsh-session-git/test/unit.mjs"
+  }
+}
