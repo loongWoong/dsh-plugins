@@ -27,4 +27,13 @@ Goal 异常停止后自动继续的 DSH host 插件。
 
 ## 安装
 
-通过 profile 的 `package.json` 依赖 + `dsh.profile.bundles` 条目接入，随进程启动自动挂载（完整步骤见[仓库根 README](../../README.md#安装)）。日志输出到 host logger（前缀 `goal-auto-resume:`）。
+一条命令接入，`dsh plugin` 装完会自动把它登记进 profile 的 `dsh.profile.bundles`，无需手工编辑：
+
+```powershell
+# 只装这一个
+dsh plugin --profile web add "github:loongWoong/dsh-plugins#path:packages/dsh-goal-auto-resume"
+# 或整仓库一条命令装五个插件
+dsh plugin --profile web add github:loongWoong/dsh-plugins
+```
+
+装完重启 DSH（完整说明见[仓库根 README](../../README.md#安装)）。日志输出到 host logger（前缀 `goal-auto-resume:`）。

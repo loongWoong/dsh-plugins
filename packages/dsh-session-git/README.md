@@ -62,7 +62,16 @@ UI 通过 Client→Host RPC 通道 `/session-git`（loopback-only）调用与模
 
 ## 安装
 
-通过 profile 的 `package.json` 依赖 + `dsh.profile.bundles` 条目接入，随进程启动自动挂载（完整步骤见[仓库根 README](../../README.md#安装)）。纯 host 行 + client 半区（设置页），消费 `fs` / `sandboxPolicy` / `sessionQuery` / `sessionPersistence` / `sessions` / `connection` / `tools`，无 isolate realm。
+一条命令接入，`dsh plugin` 装完会自动把它登记进 profile 的 `dsh.profile.bundles`，无需手工编辑：
+
+```powershell
+# 只装这一个
+dsh plugin --profile web add "github:loongWoong/dsh-plugins#path:packages/dsh-session-git"
+# 或整仓库一条命令装五个插件
+dsh plugin --profile web add github:loongWoong/dsh-plugins
+```
+
+装完重启 DSH（完整说明见[仓库根 README](../../README.md#安装)）。纯 host 行 + client 半区（设置页），消费 `fs` / `sandboxPolicy` / `sessionQuery` / `sessionPersistence` / `sessions` / `connection` / `tools`，无 isolate realm。
 
 ### 本地开发：源码目录与 node_modules 的链接
 

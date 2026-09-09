@@ -1,7 +1,6 @@
 {
   "name": "dsh-session-git",
   "version": "0.1.0",
-  "private": true,
   "description": "DSH plugin: Session Git — export DSH sessions of a workspace as JSON files under <project>/.dsh-sessions/ so they can be committed to Git, and import them back as fully continuable sessions. Makes AI collaboration knowledge a versioned, shareable team asset.",
   "type": "module",
   "main": "lib/index.js",
@@ -12,7 +11,8 @@
     "./client": {
       "default": "./lib/client.js"
     },
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./cordis.patch.yml": "./cordis.patch.yml"
   },
   "files": [
     "lib",
@@ -44,5 +44,24 @@
       "optional": true
     }
   },
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/loongWoong/dsh-plugins.git",
+    "directory": "packages/dsh-session-git"
+  },
+  "bugs": {
+    "url": "https://github.com/loongWoong/dsh-plugins/issues"
+  },
+  "homepage": "https://github.com/loongWoong/dsh-plugins/tree/main/packages/dsh-session-git#readme",
+  "keywords": [
+    "deepseek",
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "session",
+    "git",
+    "export",
+    "import"
+  ]
 }

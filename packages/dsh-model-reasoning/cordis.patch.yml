@@ -1,0 +1,9 @@
+# model-reasoning: a settings page that edits each model's reasoning capability
+# (reasoning-effort levels + wire values, default effort, image input, context
+# window, max output tokens, per-protocol compat switches) directly in the
+# `llm-pi-ai` settings namespace. Host row only — it consumes host services
+# (settings, llm, connection) and publishes none, so it needs no isolate realm.
+# The browser half is injected through package.json `dsh.client.inject`.
+- insert:
+    - id: model-reasoning
+      name: 'dsh-model-reasoning'

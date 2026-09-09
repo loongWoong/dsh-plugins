@@ -1,0 +1,53 @@
+# dsh-plugins — 聚合装配清单（aggregate assembly manifest）
+#
+# 仓库根本身就是一个 bundle：`package.json` 的 `dsh.bundle.patch` 指向这里，所以
+# `dsh plugin --profile web add github:loongWoong/dsh-plugins` 一条命令就把五个插件
+# 全部装上——profile 只把**直接依赖**中声明了 `dsh.bundle.patch` 的包并进 layer 栈
+# （`@deepseek-ai/dsh/plugin` 的 reconcile），本包是那唯一的直接依赖，五个成员由这
+# 份清单逐行插进 composition。本包**没有** `dependencies`：成员代码就在 `packages/`
+# 里，随包一起落地，不需要被 npm 安装。
+#
+# 为什么行名用相对路径而不是包名：pnpm 安装 git 依赖时，包内的 `file:./packages/x`
+# 会被解析到**消费者目录**（`ERR_PNPM_LINKED_PKG_DIR_NOT_FOUND`），`workspace:*` 也
+# 拿不到被拉取的 workspace（`ERR_PNPM_WORKSPACE_PKG_NOT_FOUND`）；而 pnpm 的严格布局
+# 又不会把传递依赖提升到 profile 顶层的 `node_modules`，按包名解析必然落空。dsh 的
+# `anchorInsertedPluginNames` 把 `insert` 行里以 `./` 开头的 `name` 重写成**本文件旁边**
+# 的 file URL（其注释原文：relative names continue to resolve beside the
+# configuration file），Host 半区于是直接从安装目录里的成员入口加载。
+#
+# Client 半区同理：`@deepseek-ai/dsh-client-modules` 的 `locatePkgJson` 认 path-like
+# 行名，并从入口文件向上找到最近的 `package.json` 作为归属包，于是成员自己的
+# `dsh.client.platform` / `exports["./client"]` 照常生效。仓库根自己没有浏览器半区，
+# 所以不能声明 `dsh.client`（声明了却没有 `./client` 导出会让 client-modules 直接报错）。
+#
+# 行内容与各成员包里的 `cordis.patch.yml` 一一对应——单独安装某个插件时用的是它自己
+# 那份（那时行名是包名）。改成员插件的入口或装配方式时，两份要一起改。
+- insert:
+    # memarc：长期记忆库（.dsh-memory/memory.json）+ 会话归档管理。只消费 host
+    # 服务（fs、sandboxPolicy、workspaceRegistry、sessionQuery、sessions、
+    # connection、tools），不发布服务，因此不需要 isolate realm。
+    - id: memarc
+      name: './packages/dsh-memarc/lib/index.js'
+
+    # session-git：把工作区会话导出为 <project>/.dsh-sessions/ 下的 JSON 以便随
+    # 代码提交，并能导回成可继续的会话。Host 行（fs、sandboxPolicy、sessionQuery、
+    # sessionPersistence、tools）。
+    - id: session-git
+      name: './packages/dsh-session-git/lib/index.js'
+
+    # session-branches：按工作区把会话 fork 关系（parentSession / subagent 血缘）
+    # 画成树。Host 行（sessionQuery、connection）；浏览器半区挂 shell.overlay 浮动
+    # 面板 + 一个设置分区。
+    - id: session-branches
+      name: './packages/dsh-session-branches/lib/index.js'
+
+    # goal-auto-resume：异常停止（报错、中断、max-tokens、崩溃恢复、driver 排队
+    # 失败）后重新武装未完成的目标，让原生 goal-round-driver 自动续下一轮。
+    - id: goal-auto-resume
+      name: './packages/dsh-goal-auto-resume/lib/index.js'
+
+    # model-reasoning：直接编辑 llm-pi-ai 命名空间里的模型推理能力（思考等级 +
+    # wire 值、路由默认、图片输入、上下文窗口、最大输出、按协议的兼容开关），
+    # 写完即生效。Host 行消费 settings、llm、connection。
+    - id: model-reasoning
+      name: './packages/dsh-model-reasoning/lib/index.js'

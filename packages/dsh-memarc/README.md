@@ -33,11 +33,20 @@ DeepSeek Harness（DSH）本地插件：**长期记忆库 + 会话归档管理**
 
 ## 安装
 
-通过 profile 的 `package.json` 依赖 + `dsh.profile.bundles` 条目接入（完整步骤见[仓库根 README](../../README.md#安装)）。
+一条命令接入，`dsh plugin` 装完会自动把它登记进 profile 的 `dsh.profile.bundles`，无需手工编辑：
+
+```powershell
+# 只装这一个
+dsh plugin --profile web add "github:loongWoong/dsh-plugins#path:packages/dsh-memarc"
+# 或整仓库一条命令装五个插件
+dsh plugin --profile web add github:loongWoong/dsh-plugins
+```
+
+装完重启 DSH（完整说明见[仓库根 README](../../README.md#安装)）。
 
 修改后：Host 半（`lib/index.js`）需**重启 DSH** 生效；Client 半（`lib/client.js`）由
 `/plugins/<id>/client.js` 每次请求现读磁盘，重启后刷新页面即生效。
 
 ## 卸载
-1. 从 `package.json` 的 `dependencies` 与 `dsh.profile.bundles` 移除 `dsh-memarc`，`pnpm install`；
+1. `dsh plugin --profile web remove dsh-memarc`（会自动从 `dsh.profile.bundles` 摘掉）；
 2. 重启 DSH。记忆文件本身保留在各工作区的 `.dsh-memory/` 下。

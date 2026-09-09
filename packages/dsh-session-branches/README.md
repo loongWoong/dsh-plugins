@@ -23,4 +23,13 @@ DSH 支持在新对话中从已有会话 fork 出分支（`parentSession`）、�
 
 ## 安装
 
-通过 profile 的 `package.json` 依赖 + `dsh.profile.bundles` 条目接入，随进程启动自动挂载，Client 模块随页面自动加载（无动态插件的"待激活"步骤）。完整步骤见[仓库根 README](../../README.md#安装)。
+一条命令接入，`dsh plugin` 装完会自动把它登记进 profile 的 `dsh.profile.bundles`，无需手工编辑：
+
+```powershell
+# 只装这一个
+dsh plugin --profile web add "github:loongWoong/dsh-plugins#path:packages/dsh-session-branches"
+# 或整仓库一条命令装五个插件
+dsh plugin --profile web add github:loongWoong/dsh-plugins
+```
+
+装完重启 DSH，Client 模块随页面自动加载（无动态插件的"待激活"步骤）。完整说明见[仓库根 README](../../README.md#安装)。

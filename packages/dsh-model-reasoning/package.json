@@ -1,7 +1,7 @@
 {
-  "name": "dsh-memarc",
+  "name": "dsh-model-reasoning",
   "version": "0.1.0",
-  "description": "DSH plugin: per-workspace long-term memory store (.dsh-memory/memory.json) plus session archive management (archive / list / full-text search over archived sessions). Ships 7 model tools and a Settings page.",
+  "description": "DSH plugin: Model Reasoning — a settings page to edit each model's reasoning capability the way pi-web's model editor does: reasoning-effort levels and their wire values, default reasoning effort, image input, context window, max output tokens, and per-protocol compat switches. Writes straight into the llm-pi-ai settings namespace and takes effect on the next request, no restart.",
   "type": "module",
   "main": "lib/index.js",
   "exports": {
@@ -33,18 +33,10 @@
     }
   },
   "peerDependencies": {
-    "@deepseek-ai/cordis": "*",
-    "@deepseek-ai/dsh-tools": "*",
-    "react": "*"
+    "@deepseek-ai/cordis": "*"
   },
   "peerDependenciesMeta": {
     "@deepseek-ai/cordis": {
-      "optional": true
-    },
-    "@deepseek-ai/dsh-tools": {
-      "optional": true
-    },
-    "react": {
       "optional": true
     }
   },
@@ -52,19 +44,21 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/loongWoong/dsh-plugins.git",
-    "directory": "packages/dsh-memarc"
+    "directory": "packages/dsh-model-reasoning"
   },
   "bugs": {
     "url": "https://github.com/loongWoong/dsh-plugins/issues"
   },
-  "homepage": "https://github.com/loongWoong/dsh-plugins/tree/main/packages/dsh-memarc#readme",
+  "homepage": "https://github.com/loongWoong/dsh-plugins/tree/main/packages/dsh-model-reasoning#readme",
   "keywords": [
     "deepseek",
     "deepseek-harness",
     "dsh",
     "dsh-plugin",
-    "memory",
-    "session-archive",
-    "settings"
+    "model",
+    "reasoning",
+    "thinking",
+    "settings",
+    "llm"
   ]
 }

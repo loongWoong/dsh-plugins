@@ -1,7 +1,6 @@
 {
   "name": "dsh-session-branches",
   "version": "0.1.0",
-  "private": true,
   "description": "DSH plugin: Session Branches — visualize session fork relationships (parentSession / subagent lineage) as a tree per workspace. Floating sidebar panel (shell.overlay) plus a Settings page; click any session to open it.",
   "type": "module",
   "main": "lib/index.js",
@@ -12,7 +11,8 @@
     "./client": {
       "default": "./lib/client.js"
     },
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./cordis.patch.yml": "./cordis.patch.yml"
   },
   "files": [
     "lib",
@@ -44,5 +44,23 @@
       "optional": true
     }
   },
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/loongWoong/dsh-plugins.git",
+    "directory": "packages/dsh-session-branches"
+  },
+  "bugs": {
+    "url": "https://github.com/loongWoong/dsh-plugins/issues"
+  },
+  "homepage": "https://github.com/loongWoong/dsh-plugins/tree/main/packages/dsh-session-branches#readme",
+  "keywords": [
+    "deepseek",
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "session",
+    "tree",
+    "sidebar"
+  ]
 }

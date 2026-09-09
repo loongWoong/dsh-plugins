@@ -1,10 +1,40 @@
 {
   "name": "dsh-plugins",
   "version": "0.1.0",
-  "private": true,
-  "description": "Community plugins for DeepSeek Harness (DSH): long-term memory, session archive, session git, session branches, goal auto-resume.",
+  "description": "Aggregate DSH plugin bundle — one install, five plugins: dsh-memarc (long-term memory + session archive), dsh-session-git (export/import sessions as committed JSON), dsh-session-branches (session fork tree), dsh-goal-auto-resume (re-arm unfinished goals), dsh-model-reasoning (per-model reasoning capability & effort editor). Declares dsh.bundle, so the whole repository installs as a single profile layer: no clone, no build.",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/loongWoong/dsh-plugins.git"
+  },
+  "keywords": [
+    "deepseek",
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "dsh-bundle",
+    "plugin-bundle"
+  ],
+  "homepage": "https://github.com/loongWoong/dsh-plugins#readme",
+  "bugs": {
+    "url": "https://github.com/loongWoong/dsh-plugins/issues"
+  },
+  "files": [
+    "cordis.patch.yml",
+    "packages",
+    "README.md",
+    "LICENSE"
+  ],
+  "exports": {
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
   "scripts": {
-    "test": "node packages/dsh-memarc/test/behavior.mjs && node packages/dsh-session-git/test/unit.mjs"
+    "test": "node packages/dsh-memarc/test/behavior.mjs && node packages/dsh-session-git/test/unit.mjs && node packages/dsh-model-reasoning/test/unit.mjs"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
   }
 }

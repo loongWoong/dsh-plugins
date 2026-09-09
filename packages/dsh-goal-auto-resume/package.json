@@ -1,7 +1,6 @@
 {
   "name": "dsh-goal-auto-resume",
   "version": "0.1.0",
-  "private": true,
   "description": "DSH plugin: re-arms an unfinished goal after abnormal stops (errors, aborts, max-tokens, crash recovery, driver queue failures) so the native goal-round driver continues the next round automatically.",
   "type": "module",
   "main": "lib/index.js",
@@ -9,7 +8,8 @@
     ".": {
       "default": "./lib/index.js"
     },
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./cordis.patch.yml": "./cordis.patch.yml"
   },
   "files": [
     "lib",
@@ -29,5 +29,23 @@
       "optional": true
     }
   },
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/loongWoong/dsh-plugins.git",
+    "directory": "packages/dsh-goal-auto-resume"
+  },
+  "bugs": {
+    "url": "https://github.com/loongWoong/dsh-plugins/issues"
+  },
+  "homepage": "https://github.com/loongWoong/dsh-plugins/tree/main/packages/dsh-goal-auto-resume#readme",
+  "keywords": [
+    "deepseek",
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "goal",
+    "resume",
+    "automation"
+  ]
 }
