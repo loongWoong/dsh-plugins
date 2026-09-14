@@ -51,3 +51,17 @@
     # 写完即生效。Host 行消费 settings、llm、connection。
     - id: model-reasoning
       name: './packages/dsh-model-reasoning/lib/index.js'
+
+# ── Harness 0.1.5 兼容：给 connection 行补回 webServer ──────────────────────
+# `ctx.connection.rpc.handle()` 经 `HostConnectionService.register()` 在**连接
+# 插件自己的 fiber** 上解析 `owner.webServer`。dsh-client-connection 0.1.2-rc.1
+# 的插件级 inject 是 ["webServer","credentials"]；0.1.5-rc.2 把 `webServer`
+# 从插件级 inject 移除（`/api` 挂载改走动态子 inject），于是任何第三方注册都抛
+# `cannot get property "webServer" without inject`，对应行直接加载失败——本仓库
+# 五个成员以及 dsh-context 等第三方插件全部中招。Loader 会把 row 级 `inject`
+# 合并进该行 fiber 的依赖表（`Inject.resolve(entry.options.inject, fiber.inject)`），
+# 所以按 0.1.2 的语义重申这份 inject，即可在 0.1.5 上一次性修好所有消费方，
+# 0.1.2 及更早版本无副作用。成员包内各自的 `cordis.patch.yml` 也带一份，单独
+# 安装某个成员时用那一份；请与 @deepseek-ai/dsh-web-app 的 connection 行保持同步。
+- id: connection
+  inject: [webRuntime, webServer]

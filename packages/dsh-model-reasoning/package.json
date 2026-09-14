@@ -1,6 +1,6 @@
 {
   "name": "dsh-model-reasoning",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "DSH plugin: Model Reasoning — a settings page to edit each model's reasoning capability the way pi-web's model editor does: reasoning-effort levels and their wire values, default reasoning effort, image input, context window, max output tokens, and per-protocol compat switches. Writes straight into the llm-pi-ai settings namespace and takes effect on the next request, no restart.",
   "type": "module",
   "main": "lib/index.js",

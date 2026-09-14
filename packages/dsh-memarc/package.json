@@ -1,6 +1,6 @@
 {
   "name": "dsh-memarc",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "DSH plugin: per-workspace long-term memory store (.dsh-memory/memory.json) plus session archive management (archive / list / full-text search over archived sessions). Ships 7 model tools and a Settings page.",
   "type": "module",
   "main": "lib/index.js",

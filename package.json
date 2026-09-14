@@ -1,6 +1,6 @@
 {
   "name": "dsh-plugins",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Aggregate DSH plugin bundle — one install, five plugins: dsh-memarc (long-term memory + session archive), dsh-session-git (export/import sessions as committed JSON), dsh-session-branches (session fork tree), dsh-goal-auto-resume (re-arm unfinished goals), dsh-model-reasoning (per-model reasoning capability & effort editor). Declares dsh.bundle, so the whole repository installs as a single profile layer: no clone, no build.",
   "license": "MIT",
   "repository": {

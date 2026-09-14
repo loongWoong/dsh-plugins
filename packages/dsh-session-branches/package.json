@@ -1,6 +1,6 @@
 {
   "name": "dsh-session-branches",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "DSH plugin: Session Branches — visualize session fork relationships (parentSession / subagent lineage) as a tree per workspace. Floating sidebar panel (shell.overlay) plus a Settings page; click any session to open it.",
   "type": "module",
   "main": "lib/index.js",

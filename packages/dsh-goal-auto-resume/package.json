@@ -1,6 +1,6 @@
 {
   "name": "dsh-goal-auto-resume",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "DSH plugin: re-arms an unfinished goal after abnormal stops (errors, aborts, max-tokens, crash recovery, driver queue failures) so the native goal-round driver continues the next round automatically.",
   "type": "module",
   "main": "lib/index.js",

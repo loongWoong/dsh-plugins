@@ -5,3 +5,19 @@
 - insert:
     - id: memarc
       name: 'dsh-memarc'
+
+# ── Harness compatibility: keep `webServer` on the connection row ──────────
+# `ctx.connection.rpc.handle()` registers the channel through
+# `HostConnectionService.register()`, which resolves `owner.webServer` on the
+# *connection plugin's* fiber. dsh-client-connection 0.1.2-rc.1 injected
+# ["webServer", "credentials"] itself; 0.1.5-rc.2 dropped `webServer` from that
+# plugin-level list (its `/api` mount now lives in a dynamic child inject), so
+# every third-party registration throws
+#   cannot get property "webServer" without inject
+# and this plugin's row fails to load. The loader merges a row-level `inject`
+# into the row fiber's dependency map, so restating the 0.1.2-compatible list
+# with `webServer` repairs every consumer on 0.1.5 and is a no-op on older
+# harnesses. Keep the list in sync with @deepseek-ai/dsh-web-app's
+# `connection` row.
+- id: connection
+  inject: [webRuntime, webServer]

@@ -25,7 +25,8 @@ DeepSeek Harness（DSH）插件集：长期记忆、会话归档、会话 Git �
 
 ## 环境要求
 
-- DeepSeek Harness（`@deepseek-ai/dsh`）**≥ 0.1.1-rc.2**（实测版本）。插件消费 DSH 的内部服务与事件（`fs`、`sessionQuery`、`sessions`、`connection`、`goals`、`agent/*`、`turn/end` 等），这些契约**没有稳定性承诺**——DSH 升级后如遇不兼容，请在本仓库 issue 里反馈。
+- DeepSeek Harness（`@deepseek-ai/dsh`）**≥ 0.1.1-rc.2**（实测到 0.1.5-rc.1）。插件消费 DSH 的内部服务与事件（`fs`、`sessionQuery`、`sessions`、`connection`、`goals`、`agent/*`、`turn/end` 等），这些契约**没有稳定性承诺**——DSH 升级后如遇不兼容，请在本仓库 issue 里反馈。
+- **Harness 0.1.5-rc 的 `webServer` 兼容补丁（已内置）**：`@deepseek-ai/dsh-client-connection` 从 0.1.5-rc 起把 `webServer` 从连接插件的插件级 `inject` 里移除（`/api` 挂载改走动态子 inject），但 `ctx.connection.rpc.handle()` 仍然经**连接插件自己的 fiber** 解析 `owner.webServer`，于是所有第三方 RPC 通道注册都会抛 `cannot get property "webServer" without inject` 并让所在行加载失败（本仓库的设置页插件、goal-auto-resume 守护页以及 `dsh-context` 等第三方插件都受影响）。本仓库的聚合根与每个成员的 `cordis.patch.yml` 都带一条 row 级补丁 `- id: connection` / `inject: [webRuntime, webServer]`，把 0.1.2 的依赖表补回去：0.1.5-rc 上恢复注册，0.1.2 及更早版本无副作用。若你手工编写 composition 而绕开这些 bundle 清单，需要自己补这一条。
 - peer 依赖（`@deepseek-ai/cordis`、`@deepseek-ai/dsh-tools`、`react`）由 DSH 进程加载插件时提供，**无需安装**。本仓库零运行时依赖，离线也能装。
 
 ## 安装
